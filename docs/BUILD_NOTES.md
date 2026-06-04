@@ -10,15 +10,15 @@
 
 ## 專案 layout
 ```
-index.html · vite.config.ts · tsconfig.json · .env（VITE_API_BASE）
+index.html · vite.config.ts · tsconfig.json（+ tsconfig.app.json · tsconfig.node.json） · .env（VITE_API_BASE）
 src/main.tsx · src/App.tsx · src/routes.tsx
 src/api/client.ts        # fetch wrapper，解 {data,error} envelope，throw ApiError
 src/api/types.ts         # 與後端對齊的型別（Category/Subject/Session/Question/...）
 src/store/local.ts       # localStorage：作答紀錄 + 設定 + 匯出/匯入
 src/theme/tokens.css     # CSS variables
 src/theme/global.css     # reset + base
-src/components/           # Nav, QuestionCard, OptionList, QuestionGrid, ProgressRing, FilterPanel, AnswerExplain, Pagination ...
-src/pages/                # Home, Practice, Exam, WrongBook, Favorites, Uncertain, Custom
+src/components/           # Nav, QuestionCard, OptionList, AnswerExplain, ProgressRing, QuestionGrid, FilterPanel, BackupPanel, Scorecard
+src/pages/                # Home, Practice, PracticeView, Exam, WrongBook, Favorites, Uncertain, Custom
 src/hooks/                # useExamTimer, useQuestionSet ...
 ```
 
@@ -55,3 +55,4 @@ src/hooks/                # useExamTimer, useQuestionSet ...
 - `/custom` 自創題本輪只 placeholder（M5 選配）。
 - 登入/OAuth 不做；以本機模式為主。
 - 題目來源資料來自後端 seed。
+- **as-built 偏離（2026-06-04 實作）**：`api/client.ts` 本輪只實作 categories / subjects / exam-sessions / questions / exam start+grade。練習題組改用 `GET /questions`（一次回含答案的完整題，免 `practice/generate` 後逐題 refetch）；`practice/generate` / `attempts` / `stats` 未串接（localStorage 模式）。練習「全部」用分頁抓完整題庫（後端 `limit=all` 會退回 page_size）。SPEC §8「篩選變更即時重產題組」改為**手動按鈕觸發**（避免每次勾選都重抓）。考試 grade 失敗回 running 時前端計時會重置（server HMAC token 仍以真實逾時為準）。
