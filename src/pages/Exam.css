@@ -1,0 +1,296 @@
+/* ===================================================================
+   模擬考頁(prefix: .ex-)
+   深色主題,沿用 tokens.css 變數。
+   =================================================================== */
+
+.ex-page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* --- intro 考前說明 --- */
+.ex-intro {
+  max-width: 560px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ex-intro__title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.ex-intro__hint {
+  color: var(--muted);
+}
+
+.ex-intro__error {
+  color: var(--wrong);
+}
+
+.ex-intro__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.ex-select {
+  padding: 8px 12px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background-color: var(--surface-2);
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+.ex-intro__rules {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background-color: var(--surface-2);
+}
+
+.ex-intro__rules li {
+  position: relative;
+  padding-left: 18px;
+  line-height: 1.7;
+}
+
+.ex-intro__rules li::before {
+  content: '•';
+  position: absolute;
+  left: 4px;
+  color: var(--primary);
+}
+
+.ex-intro__note {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.ex-intro__start {
+  align-self: flex-start;
+  font-size: 1rem;
+  padding: 12px 28px;
+}
+
+/* --- 評分中 / 狀態 --- */
+.ex-status {
+  text-align: center;
+  color: var(--muted);
+}
+
+/* --- running 考試模式 --- */
+.ex-running {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* 頂列:倒數 / 計數 / 交卷,黏在內容頂端 */
+.ex-topbar {
+  position: sticky;
+  top: 72px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 18px;
+}
+
+.ex-topbar__timer {
+  font-family: monospace;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text);
+  min-width: 100px;
+}
+
+.ex-topbar__timer--urgent {
+  color: var(--wrong);
+}
+
+.ex-topbar__count {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.ex-topbar__submit {
+  margin-left: auto;
+}
+
+.ex-error {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-color: var(--wrong);
+  color: var(--wrong);
+}
+
+.ex-error .btn {
+  margin-left: auto;
+}
+
+/* 中欄題目卡 + 右側題號盤 */
+.ex-running__body {
+  display: grid;
+  grid-template-columns: 1fr 240px;
+  gap: 16px;
+  align-items: start;
+}
+
+.ex-running__main {
+  min-width: 0;
+}
+
+.ex-running__side {
+  position: sticky;
+  top: 140px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ex-side__title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+@media (max-width: 860px) {
+  .ex-running__body {
+    grid-template-columns: 1fr;
+  }
+  .ex-running__side {
+    position: static;
+  }
+}
+
+/* --- result 成績單版型 --- */
+.ex-result-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.ex-scorecard {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ex-scorecard__summary {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.ex-scorecard__score {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.ex-scorecard__score-value {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1;
+}
+
+.ex-scorecard__score-unit {
+  font-size: 1.1rem;
+  color: var(--muted);
+}
+
+.ex-scorecard__summary-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ex-scorecard__correct {
+  font-size: 1.05rem;
+  color: var(--text);
+}
+
+.ex-scorecard__expired {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 0.8rem;
+  padding: 2px 10px;
+  border-radius: 4px;
+  background-color: rgba(241, 196, 15, 0.15);
+  border: 1px solid var(--warn);
+  color: var(--warn);
+}
+
+.ex-scorecard__heading {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 14px;
+}
+
+.ex-scorecard__subject-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ex-scorecard__subject-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background-color: var(--surface-2);
+}
+
+.ex-scorecard__subject-name {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.ex-scorecard__subject-score {
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.ex-scorecard__subject-detail {
+  font-family: monospace;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.ex-scorecard__review-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* 逐題檢視:依對錯加左側色條 */
+.ex-scorecard__review-item {
+  border-left: 4px solid transparent;
+  border-radius: var(--radius);
+}
+
+.ex-scorecard__review-item--correct {
+  border-left-color: var(--correct);
+}
+
+.ex-scorecard__review-item--wrong {
+  border-left-color: var(--wrong);
+}

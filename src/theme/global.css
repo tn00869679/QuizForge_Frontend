@@ -1,0 +1,434 @@
+/* Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Main content area — offset for fixed nav */
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 24px 40px;
+}
+
+/* Card */
+.card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--card-shadow);
+  padding: 20px;
+}
+
+/* Chip — equal-width source label */
+.chip {
+  display: inline-block;
+  font-family: monospace;
+  font-size: 0.75rem;
+  background-color: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 8px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background-color: var(--surface-2);
+  color: var(--text);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background-color: var(--border);
+  text-decoration: none;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  background-color: #3a78f0;
+  border-color: #3a78f0;
+}
+
+/* Nav */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  background-color: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  gap: 4px;
+  z-index: 100;
+}
+
+.nav__brand {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--primary);
+  margin-right: 16px;
+  text-decoration: none;
+}
+
+.nav__brand:hover {
+  text-decoration: none;
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: 1;
+}
+
+.nav__link {
+  padding: 6px 12px;
+  border-radius: 6px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: color 0.15s, background-color 0.15s;
+}
+
+.nav__link:hover {
+  color: var(--text);
+  background-color: var(--surface-2);
+  text-decoration: none;
+}
+
+.nav__link--active {
+  color: var(--primary);
+  background-color: var(--surface-2);
+}
+
+.nav__actions {
+  margin-left: auto;
+}
+
+/* ===================================================================
+   Shared quiz presentation components (prefix: ql-)
+   appended by S4 — OptionList / AnswerExplain / QuestionCard /
+   ProgressRing / QuestionGrid
+   =================================================================== */
+
+/* --- OptionList --- */
+.ql-option-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ql-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  text-align: left;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background-color: var(--surface-2);
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: border-color 0.15s, background-color 0.15s;
+}
+
+.ql-option:hover:not(:disabled) {
+  border-color: var(--primary);
+}
+
+.ql-option:disabled {
+  cursor: default;
+}
+
+.ql-option--selected {
+  border-color: var(--primary);
+  box-shadow: inset 0 0 0 1px var(--primary);
+}
+
+.ql-option--correct {
+  border-color: var(--correct);
+  background-color: rgba(46, 204, 113, 0.12);
+}
+
+.ql-option--wrong {
+  border-color: var(--wrong);
+  background-color: rgba(231, 76, 60, 0.12);
+}
+
+.ql-option__badge {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background-color: var(--border);
+  color: var(--text);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.ql-option--correct .ql-option__badge {
+  background-color: var(--correct);
+  color: #0f1115;
+}
+
+.ql-option--wrong .ql-option__badge {
+  background-color: var(--wrong);
+  color: #fff;
+}
+
+.ql-option__text {
+  flex: 1 1 auto;
+  white-space: pre-wrap;
+}
+
+/* --- AnswerExplain --- */
+.ql-explain {
+  margin-top: 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background-color: var(--surface-2);
+}
+
+.ql-explain__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+}
+
+.ql-explain__title {
+  font-weight: 600;
+}
+
+.ql-explain__toggle {
+  padding: 4px 12px;
+  font-size: 0.85rem;
+}
+
+.ql-explain__body {
+  padding: 0 14px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ql-explain__answer {
+  color: var(--correct);
+}
+
+.ql-explain__text {
+  white-space: pre-wrap;
+  color: var(--text);
+}
+
+.ql-explain__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* --- QuestionCard --- */
+.ql-card__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.ql-card__counter {
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.ql-card__source {
+  white-space: normal;
+}
+
+.ql-card__header-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ql-card__fav {
+  padding: 6px 12px;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.ql-card__fav--on {
+  color: var(--warn);
+  border-color: var(--warn);
+}
+
+.ql-card__stem {
+  white-space: pre-wrap;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.ql-card__footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.ql-card__footer .btn:last-child {
+  margin-left: auto;
+}
+
+.ql-card__uncertain--on {
+  color: var(--warn);
+  border-color: var(--warn);
+}
+
+/* --- ProgressRing --- */
+.ql-ring {
+  position: relative;
+  display: inline-block;
+}
+
+.ql-ring__svg {
+  display: block;
+}
+
+.ql-ring__track {
+  stroke: var(--surface-2);
+}
+
+.ql-ring__bar {
+  stroke: var(--primary);
+  transition: stroke-dasharray 0.3s ease;
+}
+
+.ql-ring__label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 2px;
+}
+
+.ql-ring__value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.ql-ring__sub {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+/* --- QuestionGrid --- */
+.ql-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(36px, 1fr));
+  gap: 6px;
+}
+
+.ql-grid__cell {
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.ql-grid__cell:hover {
+  transform: translateY(-1px);
+}
+
+.ql-grid__cell--unanswered {
+  background-color: var(--surface-2);
+}
+
+.ql-grid__cell--answered {
+  background-color: rgba(79, 140, 255, 0.25);
+  border-color: var(--primary);
+}
+
+.ql-grid__cell--correct {
+  background-color: var(--correct);
+  border-color: var(--correct);
+  color: #0f1115;
+}
+
+.ql-grid__cell--wrong {
+  background-color: var(--wrong);
+  border-color: var(--wrong);
+  color: #fff;
+}
+
+.ql-grid__cell--uncertain {
+  background-color: var(--warn);
+  border-color: var(--warn);
+  color: #0f1115;
+}
+
+.ql-grid__cell--current {
+  outline: 2px solid var(--text);
+  outline-offset: 1px;
+  box-shadow: 0 0 0 2px var(--bg);
+}

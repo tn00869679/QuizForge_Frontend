@@ -1,0 +1,221 @@
+/* 練習頁三欄版型(複習頁復用):左固定 / 中彈性 / 右固定 */
+.pv {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr) 300px;
+  gap: 20px;
+  align-items: start;
+}
+
+.pv__left,
+.pv__right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: sticky;
+  top: 16px;
+}
+
+/* 窄螢幕堆疊 */
+@media (max-width: 1080px) {
+  .pv {
+    grid-template-columns: 1fr;
+  }
+  .pv__left,
+  .pv__right {
+    position: static;
+  }
+}
+
+/* ---- 左欄:FilterPanel ---- */
+.pv-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pv-filter__group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pv-filter__label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.pv-filter__checks {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.pv-filter__checks--row {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-height: none;
+}
+
+.pv-filter__check {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.pv-filter__empty {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.pv-filter__select,
+.pv-filter__input,
+.pv-filter__num {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  padding: 8px 10px;
+  font-size: 0.9rem;
+}
+
+.pv-filter__num {
+  width: 80px;
+}
+
+.pv-filter__custom {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.pv-filter__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ---- 左欄:複習控制 ---- */
+.pv-review {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.pv-review__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* ---- 中欄:狀態提示 ---- */
+.pv-status {
+  color: var(--muted);
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.pv-status--error {
+  color: var(--wrong);
+}
+
+/* ---- 右欄:進度 ---- */
+.pv-progress {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.pv-progress__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.pv-progress__meta strong {
+  color: var(--text);
+  margin-left: 4px;
+}
+
+/* ---- 右欄:本機備份 ---- */
+.pv-backup__title,
+.pv-wrong__title,
+.pv-gridwrap__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.pv-backup__actions {
+  display: flex;
+  gap: 10px;
+}
+
+.pv-backup__file {
+  display: none;
+}
+
+.pv-backup__msg {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.pv-backup__msg--error {
+  color: var(--wrong);
+}
+
+/* ---- 右欄:快速回顧 ---- */
+.pv-wrong__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.pv-wrong__item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+  text-align: left;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 8px 10px;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.pv-wrong__item:hover {
+  border-color: var(--primary);
+}
+
+.pv-wrong__num {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--wrong);
+}
+
+.pv-wrong__stem {
+  font-size: 0.85rem;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
